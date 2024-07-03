@@ -41,7 +41,7 @@ bdb67177-87a1-443a-abce-d346e5e36ae1
         public const String FILEINDEX_TABLE_NAME = "3c7d8f6d-4891-4477-9b30-e3a7664a9efd";
 
         /// <summary>
-        /// 
+        /// 当前运行时系统配置的表名称
         /// </summary>
         public const String SYSTEMCFG_TABLE_NAME = "cd4129b1-2560-43c1-b079-cdbd5b5aec93";
     }
