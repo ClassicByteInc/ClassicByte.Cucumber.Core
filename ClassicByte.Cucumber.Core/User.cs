@@ -1,4 +1,11 @@
-﻿#nullable enable
+﻿/*****************************************
+ * ClassicByte Cucumber Core
+ * Author: ClassicByte
+ * Date: 2023/2/23
+ * Version: 1.0.0
+ * Description: ClassicByte Cucumber Core
+ * ************************************/
+#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Xml;
@@ -65,12 +72,18 @@ namespace ClassicByte.Cucumber.Core
         {
             get
             {
+                //获取用户配置表中的所有用户节点
                 var userNodes = UserTable.XmlDocument.DocumentElement.SelectNodes("UserItem");
+
+                //新建用户列表
                 List<User> users = new(userNodes.Count);
+
+                //遍历每一个用户节点，实例化用户对象并添加到列表中
                 foreach (XmlNode item in userNodes)
                 {
                     users.Add(new User(item.Attributes["UID"].Value, item.Attributes["Password"].Value));
                 }
+                //返回用户列表
                 return users;
             }
         }

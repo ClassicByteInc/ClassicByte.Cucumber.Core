@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*****************************************
+ * ClassicByte Cucumber Core
+ * Author: ClassicByte
+ * Date: 2023/2/23
+ * Version: 1.0.0
+ * Description: ClassicByte Cucumber Core
+ * ************************************/
+using System;
 
 namespace ClassicByte.Cucumber.Core
 {
