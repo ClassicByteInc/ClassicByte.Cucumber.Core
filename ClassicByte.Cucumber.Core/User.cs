@@ -28,7 +28,8 @@ namespace ClassicByte.Cucumber.Core
         /// <returns></returns>
         public static User? GetCurrentUser()
         {
-
+            //TODO 定义当前在线用户
+            throw new NotImplementedException();
         }
 
         /// <summary>
