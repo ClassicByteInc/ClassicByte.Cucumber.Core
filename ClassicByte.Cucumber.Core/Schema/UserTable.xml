@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UserTable>
+	<User UID ="admin" Password="admin"/>
+	<User UID ="user" Password="user"/>
+	<CurrentUser UID="admin"/>
+</UserTable>
