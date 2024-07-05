@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassicByte.Cucumber.Core", "ClassicByte.Cucumber.Core\ClassicByte.Cucumber.Core.csproj", "{BCDABC56-DDE9-46C4-B8F4-C414096F9501}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassicByte.Cucumber.Core", "ClassicByte.Cucumber.Core\ClassicByte.Cucumber.Core.csproj", "{BCDABC56-DDE9-46C4-B8F4-C414096F9501}"
+EndProject
+Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "ClassicByte.Cucumber.Core.HelpDocumentation", "ClassicByte.Cucumber.Core.HelpDocumentation\ClassicByte.Cucumber.Core.HelpDocumentation.shfbproj", "{28391BCF-5DB2-45FE-909E-3A245FAB5A5F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{BCDABC56-DDE9-46C4-B8F4-C414096F9501}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCDABC56-DDE9-46C4-B8F4-C414096F9501}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCDABC56-DDE9-46C4-B8F4-C414096F9501}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28391BCF-5DB2-45FE-909E-3A245FAB5A5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28391BCF-5DB2-45FE-909E-3A245FAB5A5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28391BCF-5DB2-45FE-909E-3A245FAB5A5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28391BCF-5DB2-45FE-909E-3A245FAB5A5F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
