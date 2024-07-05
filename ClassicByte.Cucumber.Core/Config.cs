@@ -34,6 +34,15 @@ namespace ClassicByte.Cucumber.Core
         }
 
         /// <summary>
+        /// 保存配置文件
+        /// </summary>
+        /// <param name="xml">The XML.</param>
+        public void Save(XmlDocument xml)
+        {
+            xml.Save(FileInfo.FullName);
+        }
+
+        /// <summary>
         /// 实例化一个 <see cref="ClassicByte.Cucumber.Core.Config"/> 对象
         /// </summary>
         /// <param name="fileInfo"></param>
