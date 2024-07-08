@@ -21,7 +21,17 @@ namespace ClassicByte.Cucumber.Core.IO
         public override FileSystemType FileSystemType => FileSystemType.File;
 
         internal override string FID { get; }
+        /// <summary>
+        /// 文件中的数据
+        /// </summary>
+        public byte[] Data => throw new NotImplementedException();//TODO 读取 fid 的文件
 
+        /// <summary>
+        /// 复制一个文件
+        /// </summary>
+        /// <param name="sourcePath"></param>
+        /// <param name="destinationPath"></param>
+        /// <exception cref="NotImplementedException"></exception>
         public override void Copy(string sourcePath, string destinationPath)
         {
             throw new NotImplementedException();
@@ -55,7 +65,11 @@ namespace ClassicByte.Cucumber.Core.IO
 
         public File(String path)
         {
+            var fid = new Guid().ToString();
 
+            var ft = Config.FileIndexConfig.XmlDocument;
+            var newFile = ft.CreateElement("FileItem");
+            newFile.SetAttribute("FID", fid);          
         }
     }
 }
