@@ -18,7 +18,7 @@ namespace ClassicByte.Cucumber.Core.IO
 
         public override FileSystemType FileSystemType => throw new NotImplementedException();
 
-        internal override string FID => throw new NotImplementedException();
+        internal override string FID { get; set; }
 
         public override void Copy(string sourcePath, string destinationPath)
         {
