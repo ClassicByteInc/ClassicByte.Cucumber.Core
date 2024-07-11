@@ -1,4 +1,6 @@
-﻿using System;
+﻿#nullable enable
+
+using System.Xml;
 
 namespace ClassicByte.Cucumber.Core.IO
 {
@@ -8,7 +10,23 @@ namespace ClassicByte.Cucumber.Core.IO
     /// <seealso cref="ClassicByte.Cucumber.Core.IO.FileSystem" />
     public class File : FileSystem
     {
-        public override string Name { get; }
+        public override string Name
+        {
+            get
+            {
+                var ft = Config.FileIndexConfig.XmlDocument;
+                var files = ft.DocumentElement.SelectNodes("FileItem");
+                foreach (XmlNode item in files)
+                {
+                    if (item.Attributes["FID"].Value == FID)
+                    {
+                        return item.Attributes["Name"].Value;
+                    }
+                    continue;
+                }
+                
+            }
+        }
 
         public override string Path { get; }
 
@@ -39,9 +57,9 @@ namespace ClassicByte.Cucumber.Core.IO
 
         public override void Create()
         {
-            
+
             var ft = Config.FileIndexConfig.XmlDocument;
-            var fid = new Guid().ToString();
+            var fid = FID;
             var newFile = ft.CreateElement("FileItem");
             newFile.SetAttribute("FID", fid);
             newFile.SetAttribute("Name", Name);
@@ -66,10 +84,8 @@ namespace ClassicByte.Cucumber.Core.IO
         public File(String path)
         {
             var fid = new Guid().ToString();
-
-            var ft = Config.FileIndexConfig.XmlDocument;
-            var newFile = ft.CreateElement("FileItem");
-            newFile.SetAttribute("FID", fid);          
+            Path = path;
+            FID = fid;
         }
     }
 }

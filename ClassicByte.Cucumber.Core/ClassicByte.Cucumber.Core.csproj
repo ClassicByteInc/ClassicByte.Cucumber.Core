@@ -4,18 +4,36 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
 	  <LangVersion>12.0</LangVersion>
+	  <ImplicitUsings>enable</ImplicitUsings>
+	  <Nullable>enable</Nullable>
+	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	  <Title>ClassicByte CucumberOS Core API</Title>
+	  <Authors>Higashitani Yume</Authors>
+	  <Company>ClassicByte</Company>
+	  <Description>这是ClassicByte CucumberOS 的核心API类库。</Description>
+	  <Copyright>Copyright © 2024 ClassicByte </Copyright>
+	  <PackageReadmeFile>README.md</PackageReadmeFile>
+	  <PackageTags>classicbyte;cucumber;api</PackageTags>
+	  <PackageReleaseNotes>第一次。</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DebugType>embedded</DebugType>
+    <DebugType>portable</DebugType>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DebugType>embedded</DebugType>
+    <DebugType>portable</DebugType>
   </PropertyGroup>
 
   <ItemGroup>
     <Folder Include="Help\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
