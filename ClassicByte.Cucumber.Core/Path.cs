@@ -15,6 +15,8 @@ namespace ClassicByte.Cucumber.Core
     /// </summary>
     public static class Path
     {
+        private const string CORE_VAR = "CLASSICBYTE_CUCUMBER_CORE";
+
         /// <summary>
         /// 获取系统根目录的路径。
         /// </summary>
@@ -34,14 +36,21 @@ namespace ClassicByte.Cucumber.Core
         /// </summary>
         public static DirectoryInfo SystemConfigDir => new DirectoryInfo(System.IO.Path.Combine(SystemRootDir.FullName, "Config"));
 
-
+        internal static DirectoryInfo FileSystemCoreDir => new DirectoryInfo(System.IO.Path.Combine(SystemRootDir.FullName, "File"));
         /// <summary>
         /// 初始化 <see cref="Path"/> 类的新实例。
         /// </summary>
         static Path()
         {
             var currentDir  = new DirectoryInfo(new FileInfo(Process.GetCurrentProcess().MainModule.FileName).DirectoryName);
-            SystemRootDir = currentDir.Parent.Parent;
+            if (Environment.GetEnvironmentVariable(CORE_VAR) is null)
+            {
+                SystemRootDir = currentDir.Parent.Parent;
+            }
+            else
+            {
+                SystemRootDir = new DirectoryInfo(Environment.GetEnvironmentVariable(CORE_VAR));
+            }
         }
     }
 }

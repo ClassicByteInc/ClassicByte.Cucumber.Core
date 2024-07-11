@@ -24,7 +24,7 @@ namespace ClassicByte.Cucumber.Core.IO
                     }
                     continue;
                 }
-                
+                throw new Exception.FileNotFoundException($"此文件不存在，无法获取其名称。");
             }
         }
 
@@ -38,11 +38,16 @@ namespace ClassicByte.Cucumber.Core.IO
 
         public override FileSystemType FileSystemType => FileSystemType.File;
 
-        internal override string FID { get; }
+        private String _file_path => $"{ClassicByte.Cucumber.Core.Path.FileSystemCoreDir.FullName}\\{FID}";
+
+        internal override string FID
+        {
+            get; set;
+        }
         /// <summary>
         /// 文件中的数据
         /// </summary>
-        public byte[] Data => throw new NotImplementedException();//TODO 读取 fid 的文件
+        public byte[] Data => System.IO.File.ReadAllBytes(_file_path);
 
         /// <summary>
         /// 复制一个文件
@@ -52,16 +57,18 @@ namespace ClassicByte.Cucumber.Core.IO
         /// <exception cref="NotImplementedException"></exception>
         public override void Copy(string sourcePath, string destinationPath)
         {
-            throw new NotImplementedException();
+            (new File(destinationPath)).Create();
         }
+
 
         public override void Create()
         {
 
             var ft = Config.FileIndexConfig.XmlDocument;
-            var fid = FID;
+            var fid = Guid.NewGuid().ToString();
             var newFile = ft.CreateElement("FileItem");
             newFile.SetAttribute("FID", fid);
+            FID = fid;
             newFile.SetAttribute("Name", Name);
             newFile.SetAttribute("Type", FileSystemType.ToString());
         }
@@ -81,11 +88,46 @@ namespace ClassicByte.Cucumber.Core.IO
             throw new NotImplementedException();
         }
 
-        public File(String path)
+        /// <summary>
+        /// 读取文件中的所有字节
+        /// </summary>
+        /// <returns></returns>
+        public byte[] ReadAllBytes()
         {
-            var fid = new Guid().ToString();
+            return System.IO.File.ReadAllBytes(_file_path);
+        }
+
+        /// <summary>
+        /// 写入文件中的所有字节
+        /// </summary>
+        /// <param name="data"></param>
+        public void WriteAllBytes(byte[] data)
+        {
+            System.IO.File.WriteAllBytes(_file_path, data);
+        }
+
+        /// <summary>
+        /// 初始化 <see cref="File"/> 类的新实例
+        /// </summary>
+        /// <param name="path"></param>
+        public File(String path)
+        {  
             Path = path;
-            FID = fid;
+            var ft = Config.FileIndexConfig.XmlDocument;
+            try
+            {
+                var files = ft.DocumentElement.SelectNodes("FileItem");
+                foreach (XmlNode item in files)
+                {
+                    if (item.Attributes["Path"].Value == Path)
+                    {
+                        FID = item.Attributes["FID"].Value;
+                    }
+                }
+            }
+            catch 
+            {
+            }
         }
     }
 }

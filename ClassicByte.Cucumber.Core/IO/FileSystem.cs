@@ -91,7 +91,7 @@ namespace ClassicByte.Cucumber.Core.IO
         /// <value>
         /// 唯一标识符。
         /// </value>
-        internal abstract String FID { get; }
+        internal abstract String FID { get; set; }
     }
     /// <summary>
     /// 表示文件系统类型的枚举。
