@@ -7,6 +7,7 @@
  * ************************************/
 using System.Diagnostics;
 using System.IO;
+using static ClassicByte.Cucumber.Core.TypeDef;
 
 namespace ClassicByte.Cucumber.Core
 {
@@ -15,7 +16,7 @@ namespace ClassicByte.Cucumber.Core
     /// </summary>
     public static class Path
     {
-        private const string CORE_VAR = "CLASSICBYTE_CUCUMBER_CORE";
+        
 
         /// <summary>
         /// 获取系统根目录的路径。

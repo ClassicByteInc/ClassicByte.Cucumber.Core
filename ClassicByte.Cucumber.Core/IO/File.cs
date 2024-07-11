@@ -1,7 +1,7 @@
 ﻿#nullable enable
 
 using System.Xml;
-
+using static ClassicByte.Cucumber.Core.TypeDef;
 namespace ClassicByte.Cucumber.Core.IO
 {
     /// <summary>
@@ -15,12 +15,12 @@ namespace ClassicByte.Cucumber.Core.IO
             get
             {
                 var ft = Config.FileIndexConfig.XmlDocument;
-                var files = ft.DocumentElement.SelectNodes("FileItem");
+                var files = ft.DocumentElement.SelectNodes(File_T_FileItem);
                 foreach (XmlNode item in files)
                 {
-                    if (item.Attributes["FID"].Value == FID)
+                    if (item.Attributes[File_T_FID].Value == FID)
                     {
-                        return item.Attributes["Name"].Value;
+                        return item.Attributes[File_T_Name].Value;
                     }
                     continue;
                 }
@@ -66,11 +66,11 @@ namespace ClassicByte.Cucumber.Core.IO
 
             var ft = Config.FileIndexConfig.XmlDocument;
             var fid = Guid.NewGuid().ToString();
-            var newFile = ft.CreateElement("FileItem");
-            newFile.SetAttribute("FID", fid);
+            var newFile = ft.CreateElement(File_T_FileItem);
+            newFile.SetAttribute(File_T_FID, fid);
             FID = fid;
-            newFile.SetAttribute("Name", Name);
-            newFile.SetAttribute("Type", FileSystemType.ToString());
+            newFile.SetAttribute(File_T_Name, Name);
+            newFile.SetAttribute(File_T_Type, FileSystemType.ToString());
         }
 
         public override void Delete()
@@ -98,7 +98,7 @@ namespace ClassicByte.Cucumber.Core.IO
         }
 
         /// <summary>
-        /// 写入文件中的所有字节
+        /// 写入字节，覆盖原始内容
         /// </summary>
         /// <param name="data"></param>
         public void WriteAllBytes(byte[] data)
@@ -111,21 +111,21 @@ namespace ClassicByte.Cucumber.Core.IO
         /// </summary>
         /// <param name="path"></param>
         public File(String path)
-        {  
+        {
             Path = path;
             var ft = Config.FileIndexConfig.XmlDocument;
             try
             {
-                var files = ft.DocumentElement.SelectNodes("FileItem");
+                var files = ft.DocumentElement.SelectNodes(File_T_FileItem);
                 foreach (XmlNode item in files)
                 {
-                    if (item.Attributes["Path"].Value == Path)
+                    if (item.Attributes[File_T_Path].Value == Path)
                     {
-                        FID = item.Attributes["FID"].Value;
+                        FID = item.Attributes[File_T_FID].Value;
                     }
                 }
             }
-            catch 
+            catch
             {
             }
         }
