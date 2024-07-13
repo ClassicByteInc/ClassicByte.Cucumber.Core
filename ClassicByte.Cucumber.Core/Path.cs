@@ -6,7 +6,6 @@
  * Description: ClassicByte Cucumber Core
  * ************************************/
 using System.Diagnostics;
-using System.IO;
 using static ClassicByte.Cucumber.Core.TypeDef;
 
 namespace ClassicByte.Cucumber.Core

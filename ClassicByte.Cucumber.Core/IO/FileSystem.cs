@@ -24,7 +24,7 @@ namespace ClassicByte.Cucumber.Core.IO
         public abstract String Path { get; }
 
         /// <summary>
-        /// 文件大小（<see cref="System.Int32"/>）
+        /// 文件大小（<see cref="Cucumber.Int32"/>）
         /// </summary>
         /// <value>
         /// The size.
@@ -32,7 +32,7 @@ namespace ClassicByte.Cucumber.Core.IO
         public abstract int Size { get; }
 
         /// <summary>
-        /// 文件大小（<see cref="System.Int64"/>）
+        /// 文件大小（<see cref="Cucumber.Int64"/>）
         /// </summary>
         /// <value>
         /// The long size.

@@ -16,12 +16,12 @@ namespace ClassicByte.Cucumber.Core
     public class Config
     {
         /// <summary>
-        /// 配置文件的<see cref="System.IO.FileInfo"/>对象
+        /// 配置文件的<see cref="Cucumber.IO.FileInfo"/>对象
         /// </summary>
         public FileInfo FileInfo { get; set; }
 
         /// <summary>
-        /// 配置文件的<see cref="System.Xml.XmlDocument"/>对象
+        /// 配置文件的<see cref="Cucumber.Xml.XmlDocument"/>对象
         /// </summary>
         public XmlDocument XmlDocument
         {
