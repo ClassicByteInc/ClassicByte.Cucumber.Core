@@ -11,7 +11,7 @@ using static ClassicByte.Cucumber.Core.TypeDef;
 namespace ClassicByte.Cucumber.Core
 {
     /// <summary>
-    /// 表示Cucumber常用路径的静态类。
+    /// 表示<see href="http://127.0.0.1">Cucumber</see>常用路径的静态类。
     /// </summary>
     public static class Path
     {
@@ -36,20 +36,26 @@ namespace ClassicByte.Cucumber.Core
         /// </summary>
         public static DirectoryInfo SystemConfigDir => new DirectoryInfo(System.IO.Path.Combine(SystemRootDir.FullName, "Config"));
 
+        /// <summary>
+        /// 获取文件路径。
+        /// </summary>
         internal static DirectoryInfo FileSystemCoreDir => new DirectoryInfo(System.IO.Path.Combine(SystemRootDir.FullName, "File"));
+        
         /// <summary>
         /// 初始化 <see cref="Path"/> 类的新实例。
         /// </summary>
         static Path()
         {
             var currentDir  = new DirectoryInfo(new FileInfo(Process.GetCurrentProcess().MainModule.FileName).DirectoryName);
-            if (Environment.GetEnvironmentVariable(CORE_VAR) is null)
+            if (Environment.GetEnvironmentVariable(CORE_VAR,EnvironmentVariableTarget.User) is null)
             {
                 SystemRootDir = currentDir.Parent.Parent;
             }
             else
             {
-                SystemRootDir = new DirectoryInfo(Environment.GetEnvironmentVariable(CORE_VAR));
+                var str = Environment.GetEnvironmentVariable(CORE_VAR,EnvironmentVariableTarget.User);
+                SystemRootDir = new DirectoryInfo(str);
+                Debug.WriteLine(SystemRootDir.FullName);
             }
         }
     }

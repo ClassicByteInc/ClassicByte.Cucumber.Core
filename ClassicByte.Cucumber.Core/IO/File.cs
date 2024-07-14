@@ -1,6 +1,7 @@
 ﻿#nullable enable
 
 using System.Xml;
+using System.Xml.Linq;
 using static ClassicByte.Cucumber.Core.TypeDef;
 namespace ClassicByte.Cucumber.Core.IO
 {
@@ -10,10 +11,16 @@ namespace ClassicByte.Cucumber.Core.IO
     /// <seealso cref="ClassicByte.Cucumber.Core.IO.FileSystem" />
     public class File : FileSystem
     {
+        private string _Name;
+
         public override string Name
         {
             get
             {
+                if (!string.IsNullOrEmpty(_Name))
+                {
+                    return _Name;
+                }
                 var ft = Config.FileIndexConfig.XmlDocument;
                 var files = ft.DocumentElement.SelectNodes(File_T_FileItem);
                 foreach (XmlNode item in files)
@@ -26,6 +33,7 @@ namespace ClassicByte.Cucumber.Core.IO
                 }
                 throw new Exception.FileNotFoundException($"此文件不存在，无法获取其名称。");
             }
+            
         }
 
         public override string Path { get; }
@@ -63,14 +71,33 @@ namespace ClassicByte.Cucumber.Core.IO
 
         public override void Create()
         {
-
+            //获取文件索引表
             var ft = Config.FileIndexConfig.XmlDocument;
+
+            //生成FID（GUID）
             var fid = Guid.NewGuid().ToString();
+
+            //创建文件节点
             var newFile = ft.CreateElement(File_T_FileItem);
+
+            //设置文件的FID属性
             newFile.SetAttribute(File_T_FID, fid);
+
+            //指定文件对象的FID
             FID = fid;
+
+            //指定文件对象的名称
             newFile.SetAttribute(File_T_Name, Name);
+            newFile.SetAttribute(File_T_Path, Path);
+
+            //指定文件对象的类型枚举字符串
             newFile.SetAttribute(File_T_Type, FileSystemType.ToString());
+
+            System.IO.File.Create(_file_path).Close();
+
+            //将文件节点添加到文件索引表
+            ft.DocumentElement.AppendChild(newFile);
+            Config.FileIndexConfig.Save(ft);
         }
 
         public override void Delete()
@@ -112,15 +139,27 @@ namespace ClassicByte.Cucumber.Core.IO
         /// <param name="path"></param>
         public File(String path)
         {
+            //指定路径
             Path = path;
+            {
+                var name = path.Split('/').Last();
+                _Name = name;
+            }
+            //获取文件索引表
             var ft = Config.FileIndexConfig.XmlDocument;
             try
             {
+                //获取文件索引表中的所有文件
                 var files = ft.DocumentElement.SelectNodes(File_T_FileItem);
+
+                //遍历文件
                 foreach (XmlNode item in files)
                 {
+                    //如果文件索引表中的某个文件的路径与指定的路径相同
                     if (item.Attributes[File_T_Path].Value == Path)
                     {
+
+                        //指定FID
                         FID = item.Attributes[File_T_FID].Value;
                     }
                 }

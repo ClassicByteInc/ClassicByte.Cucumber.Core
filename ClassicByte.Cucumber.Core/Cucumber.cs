@@ -27,10 +27,10 @@ namespace ClassicByte.Cucumber.Core
 
             #region 初始化配置文件
 
-            File.WriteAllText(Config.PackageManagerConfig.FileInfo.FullName,"");
-            File.WriteAllText(Config.FileIndexConfig.FileInfo.FullName,"");
-            File.WriteAllText(Config.UserConfig.FileInfo.FullName, "");
-            File.WriteAllText(Config.SystemConfig.FileInfo.FullName,"");
+            File.WriteAllText(Config.PackageManagerConfig.FileInfo.FullName, "<PackageManagerConfig />");
+            File.WriteAllText(Config.FileIndexConfig.FileInfo.FullName, "<FileIndexTable />");
+            File.WriteAllText(Config.UserConfig.FileInfo.FullName, "<UserTable />");
+            File.WriteAllText(Config.SystemConfig.FileInfo.FullName,"<SystemConfig>");
 
             #endregion
         }

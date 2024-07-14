@@ -8,7 +8,7 @@ namespace ClassicByte.Cucumber.Core.IO
     public abstract class FileSystem
     {
         /// <summary>
-        /// 名称
+        /// 名称。
         /// </summary>
         /// <value>
         /// The name.
@@ -16,7 +16,7 @@ namespace ClassicByte.Cucumber.Core.IO
         public abstract String Name { get; }
 
         /// <summary>
-        /// 路径
+        /// 路径。
         /// </summary>
         /// <value>
         /// The path.
@@ -24,7 +24,7 @@ namespace ClassicByte.Cucumber.Core.IO
         public abstract String Path { get; }
 
         /// <summary>
-        /// 文件大小（<see cref="Cucumber.Int32"/>）
+        /// 文件大小（<see cref="Cucumber.Int32"/>）。
         /// </summary>
         /// <value>
         /// The size.
@@ -32,7 +32,7 @@ namespace ClassicByte.Cucumber.Core.IO
         public abstract int Size { get; }
 
         /// <summary>
-        /// 文件大小（<see cref="Cucumber.Int64"/>）
+        /// 文件大小（<see cref="Cucumber.Int64"/>）。
         /// </summary>
         /// <value>
         /// The long size.
@@ -40,7 +40,7 @@ namespace ClassicByte.Cucumber.Core.IO
         public abstract long LongSize { get; }
 
         /// <summary>
-        /// 该<see cref="FileSystem"/>文件系统是否存在于文件系统中
+        /// 该<see cref="FileSystem"/>文件系统是否存在于文件系统中。
         /// </summary>
         /// <value>
         ///   <c>true</c> if exists; otherwise, <c>false</c>.
@@ -48,7 +48,7 @@ namespace ClassicByte.Cucumber.Core.IO
         public abstract bool Exists { get; }
 
         /// <summary>
-        /// 获取此文件系统对象的类型
+        /// 获取此文件系统对象的类型。
         /// </summary>
         /// <value>
         /// The type of the file system.
@@ -56,37 +56,37 @@ namespace ClassicByte.Cucumber.Core.IO
         public abstract FileSystemType FileSystemType { get; }
 
         /// <summary>
-        /// 在磁盘中删除此文件系统对象
+        /// 在磁盘中删除此文件系统对象。
         /// </summary>
         public abstract void Delete();
 
         /// <summary>
-        /// 重命名此文件系统对象
+        /// 重命名此文件系统对象。
         /// </summary>
         /// <param name="newName">The new name.</param>
         public abstract void Rename(String newName);
 
         /// <summary>
-        /// 移动此文件系统对象到指定路径
+        /// 移动此文件系统对象到指定路径。
         /// </summary>
         /// <param name="sourcePath">The source path.</param>
         /// <param name="destinationPath">The destination path.</param>
         public abstract void Move(String sourcePath, String destinationPath);
 
         /// <summary>
-        /// 复制此文件系统对象到指定路径
+        /// 复制此文件系统对象到指定路径。
         /// </summary>
         /// <param name="sourcePath">The source path.</param>
         /// <param name="destinationPath">The destination path.</param>
         public abstract void Copy(String sourcePath, String destinationPath);
 
         /// <summary>
-        /// 创建此文件系统对象
+        /// 创建此文件系统对象。
         /// </summary>
         public abstract void Create();
 
         /// <summary>
-        /// 获取此文件系统对象的唯一标识符
+        /// 获取此文件系统对象的唯一标识符。
         /// </summary>
         /// <value>
         /// 唯一标识符。
