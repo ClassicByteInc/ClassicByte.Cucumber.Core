@@ -9,6 +9,11 @@ Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "ClassicByte.Cucumber.Core.H
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassicByte.Cucumber.Core.Test", "ClassicByte.Cucumber.Core.Test\ClassicByte.Cucumber.Core.Test.csproj", "{6CF05D89-82E1-4E37-9561-0FCB07585976}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决方案项", "{BF2E9545-905B-4B44-B571-49E211D59703}"
+	ProjectSection(SolutionItems) = preProject
+		index.htm = index.htm
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
