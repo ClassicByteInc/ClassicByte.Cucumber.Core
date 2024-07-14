@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ClassicByte.Cucumber.Core.IO.Exception
+namespace ClassicByte.Cucumber.Core.IO.Exceptions
 {
 	/// <summary>
 	/// 找不到指定文件所引发的异常。

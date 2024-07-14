@@ -1,7 +1,6 @@
 ﻿#nullable enable
 
 using System.Xml;
-using System.Xml.Linq;
 using static ClassicByte.Cucumber.Core.TypeDef;
 namespace ClassicByte.Cucumber.Core.IO
 {
@@ -31,18 +30,37 @@ namespace ClassicByte.Cucumber.Core.IO
                     }
                     continue;
                 }
-                throw new Exception.FileNotFoundException($"此文件不存在，无法获取其名称。");
+                throw new Exceptions.FileNotFoundException($"此文件不存在，无法获取其名称。");
             }
-            
+
         }
 
         public override string Path { get; }
 
-        public override int Size { get; }
+        public override int Size => (int)(new FileInfo(_file_path).Length);
 
-        public override long LongSize { get; }
+        public override long LongSize => (new FileInfo(_file_path).Length);
 
-        public override bool Exists { get; }
+        public override bool Exists
+        {
+            get
+            {
+                var ft = Config.FileIndexConfig.XmlDocument;
+                var files = ft.DocumentElement.SelectNodes(File_T_FileItem);
+                foreach (XmlNode item in files)
+                {
+                    if (item.Attributes[File_T_FID].Value == FID)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+                return false;
+            }
+        }
 
         public override FileSystemType FileSystemType => FileSystemType.File;
 
@@ -69,8 +87,14 @@ namespace ClassicByte.Cucumber.Core.IO
         }
 
 
-        public override void Create()
+        public override void Create(bool overwrite = false)
         {
+
+            if (Exists && (!overwrite))
+            {
+                throw new Exceptions.IOException($"文件已存在，不能重复创建。如果要覆盖现有的文件，请在调用Create(bool)时指定是否覆写。");
+            }
+
             //获取文件索引表
             var ft = Config.FileIndexConfig.XmlDocument;
 
@@ -102,7 +126,24 @@ namespace ClassicByte.Cucumber.Core.IO
 
         public override void Delete()
         {
-            throw new NotImplementedException();
+            var ft = Config.FileIndexConfig.XmlDocument;
+            var files = ft.DocumentElement.SelectNodes(File_T_FileItem);
+            foreach (XmlNode file in files)
+            {
+                if (file.Attributes[File_T_FID].Value == FID)
+                {
+                    try
+                    {
+                        ft.DocumentElement.RemoveChild(file);
+                        System.IO.File.Delete(_file_path);
+                        Config.FileIndexConfig.Save(ft);
+                    }
+                    catch (System.Exception e)
+                    {
+                        throw new Core.IO.Exceptions.IOException($"此文件不存在，无法删除。", e);
+                    }
+                }
+            }
         }
 
         public override void Move(string sourcePath, string destinationPath)
@@ -121,7 +162,22 @@ namespace ClassicByte.Cucumber.Core.IO
         /// <returns></returns>
         public byte[] ReadAllBytes()
         {
-            return System.IO.File.ReadAllBytes(_file_path);
+            try
+            {
+                return System.IO.File.ReadAllBytes(_file_path);
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                throw new Core.IO.Exceptions.FileNotFoundException($"文件不存在。");
+            }
+            catch (System.IO.IOException)
+            {
+                throw new Core.IO.Exceptions.IOException($"文件无法读取。");
+            }
+            catch (System.Exception e)
+            {
+                throw new Core.IO.Exceptions.IOException($"读取文件时发生错误。", e);
+            }
         }
 
         /// <summary>
@@ -142,8 +198,7 @@ namespace ClassicByte.Cucumber.Core.IO
             //指定路径
             Path = path;
             {
-                var name = path.Split('/').Last();
-                _Name = name;
+                _Name = path.Split('/').Last();
             }
             //获取文件索引表
             var ft = Config.FileIndexConfig.XmlDocument;

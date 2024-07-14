@@ -25,7 +25,7 @@ namespace ClassicByte.Cucumber.Core.IO
             throw new NotImplementedException();
         }
 
-        public override void Create()
+        public override void Create(bool overwrite = false)
         {
             throw new NotImplementedException();
         }

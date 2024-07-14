@@ -1,4 +1,4 @@
-﻿namespace ClassicByte.Cucumber.Core.IO.Exception
+﻿namespace ClassicByte.Cucumber.Core.IO.Exceptions
 {
     /// <summary>
     /// 表示在IO过程中引发的异常。

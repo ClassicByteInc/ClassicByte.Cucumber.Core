@@ -24,7 +24,7 @@ namespace ClassicByte.Cucumber.Core.IO
         public abstract String Path { get; }
 
         /// <summary>
-        /// 文件大小（<see cref="Cucumber.Int32"/>）。
+        /// 文件大小（<see cref="int"/>）。
         /// </summary>
         /// <value>
         /// The size.
@@ -32,7 +32,7 @@ namespace ClassicByte.Cucumber.Core.IO
         public abstract int Size { get; }
 
         /// <summary>
-        /// 文件大小（<see cref="Cucumber.Int64"/>）。
+        /// 文件大小（<see cref="long"/>）。
         /// </summary>
         /// <value>
         /// The long size.
@@ -81,9 +81,12 @@ namespace ClassicByte.Cucumber.Core.IO
         public abstract void Copy(String sourcePath, String destinationPath);
 
         /// <summary>
-        /// 创建此文件系统对象。
+        /// 创建此文件系统对象，并指定是否覆盖现有文件系统对象。
         /// </summary>
-        public abstract void Create();
+        /// <remarks>
+        /// 默认情况下，如果文件系统对象已存在，则不会覆盖它。
+        /// </remarks>
+        public abstract void Create(bool overwrite = false);
 
         /// <summary>
         /// 获取此文件系统对象的唯一标识符。
