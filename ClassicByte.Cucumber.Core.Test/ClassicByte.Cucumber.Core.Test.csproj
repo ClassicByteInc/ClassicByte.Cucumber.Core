@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Test.mbconfig" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />

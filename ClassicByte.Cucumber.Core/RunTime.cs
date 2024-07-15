@@ -51,5 +51,47 @@ bdb67177-87a1-443a-abce-d346e5e36ae1
         /// 当前运行时系统配置的表名称
         /// </summary>
         public const String SYSTEMCFG_TABLE_NAME = "cd4129b1-2560-43c1-b079-cdbd5b5aec93";
+
+        /// <summary>
+        /// 初始化系统，指定系统工作目录
+        /// </summary>
+        public static void Init(DirectoryInfo dir)
+        {
+            #region 初始化文件夹
+
+            Environment.SetEnvironmentVariable(TypeDef.CORE_VAR, dir.FullName, EnvironmentVariableTarget.User);
+
+            dir.Create();
+            var coreDir = Directory.CreateDirectory($"{dir.FullName}\\Core\\");
+            var configDir = Directory.CreateDirectory($"{dir.FullName}\\Config\\");
+            var fileDir = Directory.CreateDirectory($"{dir.FullName}\\File\\");
+            var logDir = Directory.CreateDirectory($"{dir.FullName}\\Log\\");
+            #endregion
+
+            #region 初始化配置文件
+
+            File.WriteAllText(Config.PackageManagerConfig.FileInfo.FullName, "<PackageManagerConfig />");
+            File.WriteAllText(Config.FileIndexConfig.FileInfo.FullName, "<FileIndexTable />");
+            File.WriteAllText(Config.UserConfig.FileInfo.FullName, "<UserTable />");
+            File.WriteAllText(Config.SystemConfig.FileInfo.FullName, "<SystemConfig>");
+
+            #endregion
+        }
+
+        /// <summary>
+        /// 关闭系统，释放所有资源。
+        /// </summary>
+        public static void Shutdown()
+        {
+
+        }
+
+        /// <summary>
+        /// 启动系统。
+        /// </summary>
+        public static void Open()
+        {
+
+        }
     }
 }

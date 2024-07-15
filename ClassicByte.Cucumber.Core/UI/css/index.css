@@ -1,0 +1,12 @@
+﻿body
+{
+}
+.Status-Bar {
+    position: fixed;
+    /*position:center;*/
+    top:40px;
+}
+#time {
+    
+    text-align: center;
+}

@@ -15,6 +15,7 @@
 	  <PackageReadmeFile>README.md</PackageReadmeFile>
 	  <PackageTags>classicbyte;cucumber;api</PackageTags>
 	  <PackageReleaseNotes>第一次。</PackageReleaseNotes>
+	  <Version>1.0.0.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
