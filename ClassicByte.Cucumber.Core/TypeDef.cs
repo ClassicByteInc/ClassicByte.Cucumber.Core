@@ -18,5 +18,7 @@ namespace ClassicByte.Cucumber.Core
         public const string User_T_UID = "UID";
         public const string User_T_User = "User";
         public const string CORE_VAR = "CLASSICBYTE_CUCUMBER_CORE";
+
+        public const string EnvironmentVariableNode = "EnvironmentVariableNode";
     }
 }

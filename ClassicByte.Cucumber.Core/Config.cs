@@ -1,11 +1,10 @@
-﻿/*****************************************
- * ClassicByte Cucumber Core
- * Author: ClassicByte
- * Date: 2023/2/23
- * Version: 1.0.0
- * Description: ClassicByte Cucumber Core
- * ************************************/
-using System.IO;
+﻿/******************************************
+ * ClassicByte Cucumber Core              *
+ * Author: ClassicByte                    *
+ * Date: 2023/2/23                        *
+ * Version: 1.0.0                         *
+ * Description: ClassicByte Cucumber Core *
+ * ****************************************/
 using System.Xml;
 
 namespace ClassicByte.Cucumber.Core
@@ -13,8 +12,25 @@ namespace ClassicByte.Cucumber.Core
     /// <summary>
     /// 表示一个配置文件对象
     /// </summary>
-    public class Config
+    public class Config : IConfig
     {
+        /// <summary>
+        /// 表示系统配置文件
+        /// </summary>
+        public class SystemConfig : Config
+        {
+            /// <summary>
+            /// 初始化 <see cref="ClassicByte.Cucumber.Core.Config.SystemConfig"/> 类的新实例
+            /// </summary>
+            /// <param name="fileInfo"></param>
+            private SystemConfig(FileInfo fileInfo) : base(fileInfo) { }
+
+            /// <summary>
+            /// 获取环境变量节点
+            /// </summary>
+            public XmlNode EnvironmentVariableNode => base.XmlDocument.DocumentElement.SelectSingleNode(TypeDef.EnvironmentVariableNode);
+
+        }
         /// <summary>
         /// 配置文件的<see cref="Cucumber.IO.FileInfo"/>对象
         /// </summary>
@@ -59,7 +75,7 @@ namespace ClassicByte.Cucumber.Core
         {
             get
             {
-                return new Config(new FileInfo(System.IO.Path.Combine(Path.SystemCoreDir.FullName,RunTime.SYSTEMCFG_TABLE_NAME)));
+                return new Config(new FileInfo(System.IO.Path.Combine(Path.SystemCoreDir.FullName, RunTime.SYSTEMCFG_TABLE_NAME)));
             }
         }
 
@@ -96,5 +112,29 @@ namespace ClassicByte.Cucumber.Core
             }
         }
         #endregion
+    }
+
+
+
+    /// <summary>
+    /// 表示一个配置文件对象
+    /// </summary>
+    public interface IConfig
+    {
+        /// <summary>
+        /// 配置文件的<see cref="System.IO.FileInfo"/>对象
+        /// </summary>
+        public FileInfo FileInfo { get; set; }
+
+        /// <summary>
+        /// 配置文件的<see cref="System.Xml.XmlDocument"/>对象
+        /// </summary>
+        public XmlDocument XmlDocument { get; }
+
+        /// <summary>
+        /// 保存配置文件
+        /// </summary>
+        /// <param name="xml"></param>
+        public void Save(XmlDocument xml);
     }
 }
