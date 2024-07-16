@@ -59,7 +59,7 @@ bdb67177-87a1-443a-abce-d346e5e36ae1
         {
             #region 初始化文件夹
 
-            Environment.SetEnvironmentVariable(TypeDef.CORE_VAR, dir.FullName, EnvironmentVariableTarget.User);
+            Environment.SetEnvironmentVariable(TypeDef.SystemCoreRootPathVariableName, dir.FullName, EnvironmentVariableTarget.User);
 
             dir.Create();
             var coreDir = Directory.CreateDirectory($"{dir.FullName}\\Core\\");
@@ -92,6 +92,28 @@ bdb67177-87a1-443a-abce-d346e5e36ae1
         public static void Open()
         {
 
+        }
+
+        /// <summary>
+        /// 当前运行时的换行符
+        /// </summary>
+        public const String NewLine = "\n";
+
+        /// <summary>
+        /// 设置环境变量
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        public static void SetEnvironmentVariable(String key, String value)
+        {
+            var syscfg = Config.SystemConfig.XmlDocument;
+            var root = syscfg.DocumentElement;
+            var environmentVariableNode = root.SelectSingleNode(TypeDef.EnvironmentVariableNode);
+            var environmentVariableItem = syscfg.CreateElement("Item");
+            environmentVariableItem.SetAttribute("Key", key);
+            environmentVariableItem.SetAttribute("Value", value);
+            environmentVariableNode.AppendChild(environmentVariableItem);
+            Config.SystemConfig.Save(syscfg);
         }
     }
 }

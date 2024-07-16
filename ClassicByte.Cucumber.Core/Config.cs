@@ -14,23 +14,7 @@ namespace ClassicByte.Cucumber.Core
     /// </summary>
     public class Config : IConfig
     {
-        /// <summary>
-        /// 表示系统配置文件
-        /// </summary>
-        public class SystemConfig : Config
-        {
-            /// <summary>
-            /// 初始化 <see cref="ClassicByte.Cucumber.Core.Config.SystemConfig"/> 类的新实例
-            /// </summary>
-            /// <param name="fileInfo"></param>
-            private SystemConfig(FileInfo fileInfo) : base(fileInfo) { }
 
-            /// <summary>
-            /// 获取环境变量节点
-            /// </summary>
-            public XmlNode EnvironmentVariableNode => base.XmlDocument.DocumentElement.SelectSingleNode(TypeDef.EnvironmentVariableNode);
-
-        }
         /// <summary>
         /// 配置文件的<see cref="Cucumber.IO.FileInfo"/>对象
         /// </summary>
@@ -62,7 +46,7 @@ namespace ClassicByte.Cucumber.Core
         /// 实例化一个 <see cref="ClassicByte.Cucumber.Core.Config"/> 对象
         /// </summary>
         /// <param name="fileInfo"></param>
-        private Config(FileInfo fileInfo)
+        public Config(FileInfo fileInfo)
         {
             FileInfo = fileInfo;
         }
@@ -71,11 +55,11 @@ namespace ClassicByte.Cucumber.Core
         /// <summary>
         /// 系统配置文件
         /// </summary>
-        public static Config SystemConfig
+        public static SystemConfig SystemConfig
         {
             get
             {
-                return new Config(new FileInfo(System.IO.Path.Combine(Path.SystemCoreDir.FullName, RunTime.SYSTEMCFG_TABLE_NAME)));
+                return new SystemConfig(new FileInfo(System.IO.Path.Combine(Path.SystemCoreDir.FullName, RunTime.SYSTEMCFG_TABLE_NAME)));
             }
         }
 
@@ -114,7 +98,22 @@ namespace ClassicByte.Cucumber.Core
         #endregion
     }
 
+    /// <summary>
+    /// 表示系统配置文件
+    /// </summary>
+    public class SystemConfig : Config
+    {
+        /// <summary>
+        /// 初始化 <see cref="ClassicByte.Cucumber.Core.Config.SystemConfig"/> 类的新实例
+        /// </summary>
+        /// <param name="fileInfo"></param>
+        internal SystemConfig(FileInfo fileInfo) : base(fileInfo) { }
 
+        /// <summary>
+        /// 获取环境变量节点
+        /// </summary>
+        public XmlNode EnvironmentVariableNode => base.XmlDocument.DocumentElement.SelectSingleNode(TypeDef.EnvironmentVariableNode);
+    }
 
     /// <summary>
     /// 表示一个配置文件对象
@@ -136,5 +135,7 @@ namespace ClassicByte.Cucumber.Core
         /// </summary>
         /// <param name="xml"></param>
         public void Save(XmlDocument xml);
+
+
     }
 }

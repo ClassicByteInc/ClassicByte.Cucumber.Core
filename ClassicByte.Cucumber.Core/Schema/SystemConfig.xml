@@ -1,4 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <SystemConfig>
 	<ConfigItem Name="Test" Value="TestValue"/>
+	<EnvirmentVariableNode>
+		<Item Key="" Value=""/>
+	</EnvirmentVariableNode>
 </SystemConfig>

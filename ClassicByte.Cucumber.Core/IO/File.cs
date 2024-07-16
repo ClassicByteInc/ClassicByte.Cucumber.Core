@@ -21,12 +21,12 @@ namespace ClassicByte.Cucumber.Core.IO
                     return _Name;
                 }
                 var ft = Config.FileIndexConfig.XmlDocument;
-                var files = ft.DocumentElement.SelectNodes(File_T_FileItem);
+                var files = ft.DocumentElement.SelectNodes(FileIndexTableFileItem);
                 foreach (XmlNode item in files)
                 {
-                    if (item.Attributes[File_T_FID].Value == FID)
+                    if (item.Attributes[FileIndexTableItemFID].Value == FID)
                     {
-                        return item.Attributes[File_T_Name].Value;
+                        return item.Attributes[FileIndexTableItemName].Value;
                     }
                     continue;
                 }
@@ -46,10 +46,10 @@ namespace ClassicByte.Cucumber.Core.IO
             get
             {
                 var ft = Config.FileIndexConfig.XmlDocument;
-                var files = ft.DocumentElement.SelectNodes(File_T_FileItem);
+                var files = ft.DocumentElement.SelectNodes(FileIndexTableFileItem);
                 foreach (XmlNode item in files)
                 {
-                    if (item.Attributes[File_T_FID].Value == FID)
+                    if (item.Attributes[FileIndexTableItemFID].Value == FID)
                     {
                         return true;
                     }
@@ -102,20 +102,20 @@ namespace ClassicByte.Cucumber.Core.IO
             var fid = Guid.NewGuid().ToString();
 
             //创建文件节点
-            var newFile = ft.CreateElement(File_T_FileItem);
+            var newFile = ft.CreateElement(FileIndexTableFileItem);
 
             //设置文件的FID属性
-            newFile.SetAttribute(File_T_FID, fid);
+            newFile.SetAttribute(FileIndexTableItemFID, fid);
 
             //指定文件对象的FID
             FID = fid;
 
             //指定文件对象的名称
-            newFile.SetAttribute(File_T_Name, Name);
-            newFile.SetAttribute(File_T_Path, Path);
+            newFile.SetAttribute(FileIndexTableItemName, Name);
+            newFile.SetAttribute(FileIndexTableItemPath, Path);
 
             //指定文件对象的类型枚举字符串
-            newFile.SetAttribute(File_T_Type, FileSystemType.ToString());
+            newFile.SetAttribute(FileIndexTableItemType, FileSystemType.ToString());
 
             System.IO.File.Create(_file_path).Close();
 
@@ -127,10 +127,10 @@ namespace ClassicByte.Cucumber.Core.IO
         public override void Delete()
         {
             var ft = Config.FileIndexConfig.XmlDocument;
-            var files = ft.DocumentElement.SelectNodes(File_T_FileItem);
+            var files = ft.DocumentElement.SelectNodes(FileIndexTableFileItem);
             foreach (XmlNode file in files)
             {
-                if (file.Attributes[File_T_FID].Value == FID)
+                if (file.Attributes[FileIndexTableItemFID].Value == FID)
                 {
                     try
                     {
@@ -205,17 +205,17 @@ namespace ClassicByte.Cucumber.Core.IO
             try
             {
                 //获取文件索引表中的所有文件
-                var files = ft.DocumentElement.SelectNodes(File_T_FileItem);
+                var files = ft.DocumentElement.SelectNodes(FileIndexTableFileItem);
 
                 //遍历文件
                 foreach (XmlNode item in files)
                 {
                     //如果文件索引表中的某个文件的路径与指定的路径相同
-                    if (item.Attributes[File_T_Path].Value == Path)
+                    if (item.Attributes[FileIndexTableItemPath].Value == Path)
                     {
 
                         //指定FID
-                        FID = item.Attributes[File_T_FID].Value;
+                        FID = item.Attributes[FileIndexTableItemFID].Value;
                     }
                 }
             }

@@ -47,13 +47,13 @@ namespace ClassicByte.Cucumber.Core
         static Path()
         {
             var currentDir  = new DirectoryInfo(new FileInfo(Process.GetCurrentProcess().MainModule.FileName).DirectoryName);
-            if (Environment.GetEnvironmentVariable(CORE_VAR,EnvironmentVariableTarget.User) is null)
+            if (Environment.GetEnvironmentVariable(SystemCoreRootPathVariableName,EnvironmentVariableTarget.User) is null)
             {
                 SystemRootDir = currentDir.Parent.Parent;
             }
             else
             {
-                var str = Environment.GetEnvironmentVariable(CORE_VAR,EnvironmentVariableTarget.User);
+                var str = Environment.GetEnvironmentVariable(SystemCoreRootPathVariableName,EnvironmentVariableTarget.User);
                 SystemRootDir = new DirectoryInfo(str);
                 Debug.WriteLine(SystemRootDir.FullName);
             }
